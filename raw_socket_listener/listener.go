@@ -20,7 +20,6 @@ import (
 	"log"
 	"net"
 	"runtime"
-	"runtime/debug"
 	"strconv"
 	"strings"
 	"sync"
@@ -717,9 +716,7 @@ func (t *Listener) isValidPacket(buf []byte) bool {
 func (t *Listener) processTCPPacket(packet *TCPPacket) {
 	// Don't exit on panic
 	defer func() {
-		if r := recover(); r != nil {
-			log.Println("PANIC: pkg:", r, packet, string(debug.Stack()))
-		}
+		if r := recover(); r != nil {}
 	}()
 
 	var responseRequest *TCPMessage
